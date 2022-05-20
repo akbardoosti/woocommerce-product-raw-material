@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-03-16 16:58+0330\n"
+"PO-Revision-Date: 2022-03-16 17:01+0330\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/Product.php:146
+msgid "Add product"
+msgstr "افزودن محصول"
+
+#: includes/Product.php:153 includes/Product.php:289
+msgid "Product name"
+msgstr "نام محصول"
+
+#: includes/Product.php:156 includes/Product.php:290
+msgid "Product price"
+msgstr "قیمت محصول"
+
+#: includes/Product.php:167
+msgid "Save products information"
+msgstr "ذخیره اطلاعات محصولات"
+
+#: includes/Product.php:174
+msgid "Products list"
+msgstr "لیست محصولات"
+
+#: includes/Product.php:308
+msgid "Unable to delete middle rows"
+msgstr "قادر به حذف ردیف های میانی نیست"
+
+#: includes/Product.php:346
+msgid "It is necessary to fill in all the fields"
+msgstr "لازم است در تمام زمینه ها پر شود"
+
+#: includes/Product.php:356
+msgid "Products saved successfully"
+msgstr "محصولات ذخیره شده با موفقیت"
+
+#: includes/Product.php:381
+msgid "The product was removed"
+msgstr "محصول حذف شد"
+
+#: includes/Product.php:398
+msgid "The product was updated"
+msgstr "اطلاعات محصول به روزرسانی شد"
+
+#: includes/Product.php:444
+msgid "Name"
+msgstr "نام"
+
+#: includes/Product.php:445
+msgid "Price"
+msgstr "قیمت "
+
+#: product-details.php:41 product-details.php:42 product-details.php:53
+msgid "Product details"
+msgstr "جزئیات محصول"

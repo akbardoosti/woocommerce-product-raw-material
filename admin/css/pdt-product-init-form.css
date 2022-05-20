@@ -1,0 +1,346 @@
+.k-state-selected{
+        background-color: #f56147 !important;
+        color: white !important;
+    }
+    
+    .k-master-row:nth-of-type(odd){
+        background-color: #f9efe6;
+    }
+    .k-master-row:nth-of-type(even){
+        background-color: #dfe3d5;
+    }
+    .k-list-content{
+        background-color: #f0f0f1
+    }
+    
+    .k-filter-menu.k-popup .k-filter-menu-container {
+        padding: 4px 8px;
+        background-color: #eeefeb;
+    }
+.k-notification-wrap{
+    /*background-color:green;*/
+    color:white;
+}
+ 
+ .k-notification-error{
+     background-color:red;
+ }
+ .k-notification-success{
+     background-color:green;
+ }
+  .k-notification-info{
+     background-color:blue;
+  }
+	.product-container{
+	    /*display: flex;*/
+	}
+    .product-container .col-xs-6{
+        width:50%;
+        display: inline-block;
+        padding: 0 10px;
+        margin-bottom: 10px;
+    }
+    .product-container .col-xs-6 input{
+        display: block;
+        width: 100%;
+    }
+    
+    .product-container .col-xs-6 label,
+    .product-container .col-xs-6 select{
+        display:block;
+    }
+    .product-container .col-xs-6 select{
+        width: 100%;
+    }
+    .btn-add{
+        background-color: #087406;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        margin: 10px;
+        padding: 4px 6px;
+        transition: all 0.3s ease-in;
+        -webkit-transition: all 0.3s ease-in;
+    }
+    .btn-add:hover{
+        background-color: #05b502;
+    }
+    .btn-remove{
+        color:#ff0000;
+        border:none;
+        cursor: pointer;
+    }
+    .btn-save-info{
+        background-color: #048543;
+        border: none;
+        padding: 10px 20px;
+        min-width: 100px;
+        color: #fff;
+        transition: all 0.3s ease-in;
+        cursor: pointer;
+        -webkit-transition: all 0.3s ease-in;
+    }
+    .btn-save-info:hover{
+        background-color: #05b502;
+    }
+    
+    /* ALERTS */
+    /* inspired by Twitter Bootstrap */
+    
+    .alert {
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid #eed3d7;
+      border-radius: 4px;
+      position: absolute;
+      bottom: 300px;
+      right: 21px;
+      /* Each alert has its own width */
+      float: right;
+      clear: right;
+      background-color: white;
+    }
+    
+    .alert-red {
+      color: white;
+      background-color: #DA4453;
+    }
+    .alert-green {
+      color: white;
+      background-color: #37BC9B;
+    }
+    .alert-blue {
+      color: white;
+      background-color: #4A89DC;
+    }
+    .alert-yellow {
+      color: white;
+      background-color: #F6BB42;
+    }
+    .alert-orange {
+      color:white;
+      background-color: #E9573F;
+    }
+    
+    .lds-facebook {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+    .lds-facebook div {
+      display: inline-block;
+      position: absolute;
+      left: 8px;
+      width: 16px;
+      background: #fff;
+      animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+    }
+    .lds-facebook div:nth-child(1) {
+      left: 8px;
+      animation-delay: -0.24s;
+    }
+    .lds-facebook div:nth-child(2) {
+      left: 32px;
+      animation-delay: -0.12s;
+    }
+    .lds-facebook div:nth-child(3) {
+      left: 56px;
+      animation-delay: 0;
+    }
+    @keyframes lds-facebook {
+      0% {
+        top: 8px;
+        height: 64px;
+      }
+      50%, 100% {
+        top: 24px;
+        height: 32px;
+      }
+    }
+
+    #pagination_container ul {
+        display: flex !important;
+    }
+
+    /*.it .btn-orange {
+      background-color: blue;
+      border-color: #777!important;
+      color: #777;
+      text-align: left;
+      width:100%;
+    }
+    .it input.form-control {
+      border:none;
+      margin-bottom:0px;
+      border-radius: 0px;
+      border-bottom: 1px solid #ddd;
+      box-shadow: none;
+    }
+    .it .form-control:focus {
+      border-color: #ff4d0d;
+      box-shadow: none;
+      outline: none;
+    }
+    
+    */
+    .custom-file-upload-hidden {
+      display: none;
+      visibility: hidden;
+      position: absolute;
+      left: -9999px;
+    }
+
+    .custom-file-upload {
+      display: block;
+      width: auto;
+      font-size: 16px;
+      margin-top: 30px;
+    }
+    .custom-file-upload label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .file-upload-wrapper {
+      position: relative;
+      margin-bottom: 5px;
+      display: flex;
+    }
+
+    .file-upload-input {
+      width: 50vw;
+      color: #fff;
+      font-size: 16px;
+      padding: 11px 17px;
+      border: none;
+      background-color: #c0392b;
+      -moz-transition: all 0.2s ease-in;
+      -o-transition: all 0.2s ease-in;
+      -webkit-transition: all 0.2s ease-in;
+      transition: all 0.2s ease-in;
+      float: left;
+      /* IE 9 Fix */
+    }
+    .file-upload-input:hover, .file-upload-input:focus {
+      background-color: #048543;
+      color: #fff;
+      outline: none;
+    }
+
+    .file-upload-button ,
+    .file-upload-btn {
+      cursor: pointer;
+      display: inline-block;
+      color: #fff;
+      font-size: 16px;
+      text-transform: uppercase;
+      padding: 11px 20px;
+      border: none;
+      margin-left: -1px;
+      background-color: #048543;
+      float: left;
+      /* IE 9 Fix */
+      -moz-transition: all 0.2s ease-in;
+      -o-transition: all 0.2s ease-in;
+      -webkit-transition: all 0.2s ease-in;
+      transition: all 0.2s ease-in;
+    }
+    .file-upload-btn {
+        background-color: #10128b;
+        margin-right: 6px;
+    }
+    .file-upload-btn:hover {
+        background-color: #2a2dd5;
+    }
+    .file-upload-button:hover {
+      background-color: #05b502;
+    }
+
+    .radio-button-container label {
+        border-radius: 3px;
+        border: 1px solid #D1D3D4;
+        font-size: 16px;
+        padding: 1px 9px;
+    }
+
+    /* hide input */
+    .radio-button-container input.radio {
+        display: none;
+    }
+    .radio-button-container input.radio:empty {
+        margin-left: -999px;
+    }
+
+    /* style label */
+    .radio-button-container input.radio:empty ~ label {
+        position: relative;
+        float: left;
+        line-height: 2.5em;
+        text-indent: 3.25em;
+        margin-top: 2em;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+.radio-button-container input.radio:empty ~ label:before {
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    content: '';
+    width: 2.5em;
+    background: #D1D3D4;
+    border-radius: 3px 0 0 3px;
+}
+
+/* toggle hover */
+.radio-button-container input.radio:hover:not(:checked) ~ label:before {
+    content:'\2714';
+    text-indent: .9em;
+    color: #C2C2C2;
+}
+
+.radio-button-container input.radio:hover:not(:checked) ~ label {
+    color: #888;
+}
+
+/* toggle on */
+.radio-button-container input.radio:checked ~ label:before {
+    content:'\2714';
+    text-indent: .9em;
+    color: #9CE2AE;
+    background-color: #4DCB6D;
+}
+
+.radio-button-container input.radio:checked ~ label {
+    color: #777;
+
+}
+
+/* radio focus */
+.radio-button-container input.radio:focus ~ label:before {
+    box-shadow: 0 0 0 3px #999;
+}
+
+.file-download-button {
+    background-color: #1cb599;
+    color: #fff;
+    padding: 0px 8px;
+    margin-right: 10px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 10px;
+    text-decoration: none;
+    transition: all 0.4s ease-in;
+}
+.file-download-button:hover {
+    background-color: #0ed3af;
+    color: #fff;
+}
