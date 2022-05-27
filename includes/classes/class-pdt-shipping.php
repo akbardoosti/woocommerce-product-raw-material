@@ -19,8 +19,7 @@ class PDT_Shipping {
         $this->wage_cost = isset( $args[ 'wage_cost' ] ) ? $args[ 'wage_cost' ] : "";
         $this->product_id = isset( $args[ 'product_id' ] ) ? $args[ 'product_id' ] : "";
 
-        // Load database class tools
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/tools/class-pd-database.php';
+        $this->load_dependencies();
     }
     
     public static function get_instance() {
@@ -51,11 +50,11 @@ class PDT_Shipping {
     }
         
     public function create_table() {
-        
+        global $wpdb, $table_prefix;
         $result = true;
-        if( ! PD_Databse::is_table_exist( $this->table_prefix . $this->table_name ) ) {
+        if( ! PDT_Databse::is_table_exist( $table_prefix . $this->table_name ) ) {
             
-            $sql .= "CREATE TABLE ".$this->table_prefix.$this->table_name." (";
+            $sql .= "CREATE TABLE ".$table_prefix.$this->table_name." (";
             $sql .= 	"ID bigint(20) AUTO_INCREMENT NOT NULL,";
             $sql .=     "product_id bigint(20) NOT NULL,";
             $sql .=     "shipping_cost varchar(20) NOT NULL,";
@@ -66,7 +65,7 @@ class PDT_Shipping {
             $sql .= 	"CONSTRAINT product_id UNIQUE (product_id)";
             $sql .= ");";
             
-            $result = $this->wpdb->query( $this->wpdb->prepare( $sql ) );
+            $result = $wpdb->query( $wpdb->prepare( $sql ) );
 
         }
         
@@ -75,45 +74,38 @@ class PDT_Shipping {
     }
         
     public function delete_table() {
-        
+        global $wpdb, $table_prefix;
         $result = true;
         
-        $drop_sql  = "DROP TABLE IF EXISTS {$this->table_prefix}{$this->table_name};";
+        $drop_sql  = "DROP TABLE IF EXISTS {$table_prefix}{$this->table_name};";
     
-        $result = $this->wpdb->query(
-            $this->wpdb->prepare($drop_sql)
+        $result = $wpdb->query(
+            $wpdb->prepare($drop_sql)
         );
         
         return $result;
     }
         
     public function save_info() {
-        
+        global $wpdb, $table_prefix;
 
-        $result = $this->wpdb->insert(
+        $result = $wpdb->insert(
             
-            $this->table_prefix.$this->table_name,
+            $table_prefix . $this->table_name,
             array(
                 'shipping_cost' => $this->shipping_cost,
-                'other_costs' => $this->other_costs,
-                'wage_cost' => $this->wage_cost,
-                'product_id' => $this->product_id,
-                'created' => time()
+                'other_costs'   => $this->other_costs,
+                'wage_cost'     => $this->wage_cost,
+                'product_id'    => $this->product_id,
+                'created'       => time()
             )
             
         );
-        // $arr = array(
-    //               'shipping_cost' => $this->shipping_cost,
-    //                   'other_costs' => $this->other_costs,
-    //                   'wage_cost' => $this->wage_cost,
-    //               'created' => time()
-    //           );
-    //   die(json_encode($arr));
-    //  die(json_decode( ));
+        
         if( ! $result ) {
-            $result = $this->wpdb->update(
+            $result = $wpdb->update(
                 
-                $this->table_prefix . $this->table_name,
+                $table_prefix . $this->table_name,
                 array(
                     'shipping_cost' => $this->shipping_cost,
                     'other_costs' => $this->other_costs,
@@ -130,10 +122,11 @@ class PDT_Shipping {
     }
         
     public function get_row( $id ) {
-        $sql = "SELECT shipping_cost, other_costs, wage_cost FROM {$this->table_prefix}{$this->table_name} WHERE ". 
+        global $wpdb, $table_prefix;
+        $sql = "SELECT shipping_cost, other_costs, wage_cost FROM {$table_prefix}{$this->table_name} WHERE ". 
                 "product_id = '$id'";
-        $result = $this->wpdb->get_row(
-            $this->wpdb->prepare(
+        $result = $wpdb->get_row(
+            $wpdb->prepare(
                 $sql
             )
         );
@@ -142,10 +135,12 @@ class PDT_Shipping {
     }
         
     public function get_sum_of_price( $id ) {
-        $sql = "SELECT SUM(shipping_cost + other_costs + wage_cost) FROM {$this->table_prefix}{$this->table_name} WHERE ". 
+        global $wpdb, $table_prefix;
+
+        $sql = "SELECT SUM(shipping_cost + other_costs + wage_cost) FROM {$table_prefix}{$this->table_name} WHERE ". 
                 "product_id = '$id'";
-        $result = $this->wpdb->get_var(
-            $this->wpdb->prepare(
+        $result = $wpdb->get_var(
+            $wpdb->prepare(
                 $sql
             )
         );
@@ -194,9 +189,9 @@ class PDT_Shipping {
             'num_of_pages' => $products->max_num_pages
         );
         
-        // $sql = "SELECT * FROM {$this->table_prefix}{$this->table_name} ";
-        // $result = $this->wpdb->get_var(
-        //     $this->wpdb->prepare(
+        // $sql = "SELECT * FROM {$table_prefix}{$this->table_name} ";
+        // $result = $wpdb->get_var(
+        //     $wpdb->prepare(
         //         $sql
         //     )
         // );
@@ -206,15 +201,16 @@ class PDT_Shipping {
 
 
     public function clear_shipping_cost() {
-        // die($this->table_prefix.$this->table_name);
+        
+        global $wpdb, $table_prefix;
 
         $sql = "UPDATE ".
-        $this->table_prefix.
+        $table_prefix.
         $this->table_name.
         " SET `shipping_cost`= '' WHERE 1";
         // die($sql);
-        return $this->wpdb->query(
-            $this->wpdb->prepare( $sql )
+        return $wpdb->query(
+            $wpdb->prepare( $sql )
         );
 
     }
@@ -259,8 +255,8 @@ class PDT_Shipping {
         $this->table_name.
         " SET `other_costs`= '' WHERE 1";
         // die($sql);
-        return $this->wpdb->query(
-            $this->wpdb->prepare( $sql )
+        return $wpdb->query(
+            $wpdb->prepare( $sql )
         );
     }
 
@@ -343,6 +339,9 @@ class PDT_Shipping {
         die( json_encode( $result ) );
     }
 
-    
+    public function load_dependencies() {
+        // Load database class tools
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/tools/class-pd-database.php';
+    }
     
 }
