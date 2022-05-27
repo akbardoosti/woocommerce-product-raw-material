@@ -9,6 +9,17 @@ class PDT_Material_Item {
         $this->load_dependencies();
     }
 
+    /**
+	 * Return an instance of RFM_Databse
+	 * @since 1.0.0
+	 * @access   public
+	 */ 
+	public static function get_instance() {
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new self();
+        }
+        return self::$instance;	
+	}
     
     public function load_dependencies() {
         // Load database class tools

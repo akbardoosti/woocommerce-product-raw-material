@@ -90,13 +90,14 @@
              return $result;
          }
         /**
-        *   This function created for Create table 
+         * Creates table in MySQL database
+         * @since 1.0.0
+         * @return boolean 
         */
         public function create_table(){
             global $wpdb, $table_prefix;
             // wp_die($this->table_name) ;
-            // wp_die( var_dump(PD_Databse::is_table_exist( $table_prefix.$this->table_name )) );
-            if( ! PD_Databse::is_table_exist( $table_prefix.$this->table_name ) ) {
+            if( ! PDT_Databse::is_table_exist( $table_prefix.$this->table_name ) ) {
                 $sql .= "CREATE TABLE " . $table_prefix . $this->table_name . "(";
                 $sql .=     "ID int(10) AUTO_INCREMENT NOT NULL,";
                 $sql .=     "NAME VARCHAR(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,";
@@ -117,7 +118,7 @@
             global $wpdb, $table_prefix;
             
             
-            if( ! PD_Databse::is_table_exist( $table_prefix . $this->items_table_name ) ) {
+            if( ! PDT_Databse::is_table_exist( $table_prefix . $this->items_table_name ) ) {
 
                 $sql .= "CREATE TABLE " . $table_prefix . $this->items_table_name ." (";
                 $sql .=     "ID bigint(20) AUTO_INCREMENT NOT NULL,";
