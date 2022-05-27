@@ -6,6 +6,8 @@ class PDT_Material_Item {
     private static $instance;
 
     public function __construct( $data = [] ){
+        $this->table_name = "pd_product_items";
+        
         $this->load_dependencies();
     }
 
@@ -27,16 +29,16 @@ class PDT_Material_Item {
     public  function delete_save_information_table(){
         global $wpdb, $table_prefix ;
             
-        $drop_sql  = "DROP TABLE IF EXISTS {$table_prefix}pd_product_items;";
+        $drop_sql  = "DROP TABLE IF EXISTS {$table_prefix}{$this->table_name};";
         
-        $result = $wpdb -> query($wpdb->prepare($drop_sql));
+        $result = $wpdb->query( $wpdb->prepare( $drop_sql ) );
         return $result;
     }
 
     /**
      * This function create save information table
      */ 
-    public  function create_save_information_table(){
+    public  function create_table(){
         global $wpdb, $table_prefix;
         
         
@@ -51,7 +53,7 @@ class PDT_Material_Item {
             $sql .=     "PRIMARY KEY(ID)";
             $sql .= ");";
             
-            $result = $wpdb -> query($wpdb->prepare($sql));
+            $result = $wpdb->query($wpdb->prepare($sql));
 
         }
         

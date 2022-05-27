@@ -8,7 +8,7 @@
         
         private $table_prefix;
         private $table_name = "pd_product_details";
-        private $items_table_name = "pd_product_items";
+        
         private $id;
         private static $instance;
        
