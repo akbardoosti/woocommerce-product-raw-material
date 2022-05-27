@@ -221,13 +221,15 @@ class PDT_Shipping {
 
 
     public function clear_all_wage_cost() {
+        global $wpdb, $table_prefix;
+        
         $sql = "UPDATE ".
-        $this->table_prefix.
+        $table_prefix.
         $this->table_name.
         " SET `wage_cost`= '' WHERE 1";
         // die($sql);
-        return $this->wpdb->query(
-            $this->wpdb->prepare( $sql )
+        return $wpdb->query(
+            $wpdb->prepare( $sql )
         );
     }
 
@@ -261,14 +263,15 @@ class PDT_Shipping {
         // Send response in JSON format
         // wp_send_json( $response );
         // wp_send_json_error();
-        wp_send_json_success($response);
-        $results =  PDT_Shipping::get_instance()->get_shipping_list(array(
+        $results =  $this->get_shipping_list(array(
             'type'          => $_POST['type'],
             'num_per_page'  => $_POST['num_per_page'],
             'page_number'   => $_POST['page_number'],
         ));
         
-        die(json_encode($results));
+        wp_send_json_success($results);
+        
+        die();
     }
 
     /**
@@ -279,65 +282,66 @@ class PDT_Shipping {
     public function save_shipping() {
         // Security check
         check_ajax_referer('referer_id', 'nonce');
+        $shipping =  new PDT_Shipping( array(
+            'shipping_cost' => $_POST['shipping_cost'], 
+            'other_costs'   => $_POST['other_costs'], 
+            'wage_cost'     => $_POST['wage_cost'], 
+            'product_id'    => $_POST['product_id'], 
+        ) );
+        $result = $shipping->save_info();
 
         $response = 'OK';
         // Send response in JSON format
         // wp_send_json( $response );
         // wp_send_json_error();
         wp_send_json_success($response);
-            $shipping =  new PDT_Shipping( array(
-            'shipping_cost' => $_POST['shipping_cost'], 
-            'other_costs'   => $_POST['other_costs'], 
-            'wage_cost'     => $_POST['wage_cost'], 
-            'product_id'    => $_POST['product_id'], 
-        ) );
+            
         
-        $result = $shipping->save_info();
         
         die(json_encode($result));
     }
 
-        public function clear_all_shipping_cost() {
-// Security check
-check_ajax_referer('referer_id', 'nonce');
+    public function clear_all_shipping_cost() {
+        // Security check
+        check_ajax_referer('referer_id', 'nonce');
 
-$response = 'OK';
-// Send response in JSON format
-// wp_send_json( $response );
-// wp_send_json_error();
-wp_send_json_success($response);
-        $result = PDT_Shipping::get_instance()->clear_shipping_cost();
+        $response = 'OK';
+        $result = $this->clear_shipping_cost();
+        // Send response in JSON format
+        // wp_send_json( $response );
+        // wp_send_json_error();
+        wp_send_json_success($response);
+        
 
         die( json_encode( $result ) );
-        }
-
-        public function clear_all_wage_cost() {
-            // Security check
-            check_ajax_referer('referer_id', 'nonce');
-
-            $response = 'OK';
-            // Send response in JSON format
-            // wp_send_json( $response );
-            // wp_send_json_error();
-            wp_send_json_success($response);
-
-            die();
-
-             $result = PDT_Shipping::get_instance()->clear_all_wage_cost();
-            die( json_encode( $result ) );
-        }
-        public function clear_all_other_cost(){
-            // Security check
-            check_ajax_referer('referer_id', 'nonce');
-
-            $response = 'OK';
-            // Send response in JSON format
-            // wp_send_json( $response );
-            // wp_send_json_error();
-            wp_send_json_success($response);
-
-            die();
-            $result = PDT_Shipping::get_instance()->clear_all_other_cost();
-            die( json_encode( $result ) );
-        }
     }
+
+    public function clear_all_wage_cost() {
+        // Security check
+        check_ajax_referer('referer_id', 'nonce');
+
+        $response = 'OK';
+        $result = $this->clear_all_wage_cost();
+        // Send response in JSON format
+        // wp_send_json( $response );
+        // wp_send_json_error();
+        wp_send_json_success($response);
+
+        die();
+
+    }
+    public function clear_all_other_cost(){
+        // Security check
+        check_ajax_referer('referer_id', 'nonce');
+
+        $response = 'OK';
+        $result = $this->clear_all_other_cost();
+
+        // Send response in JSON format
+        // wp_send_json( $response );
+        // wp_send_json_error();
+        wp_send_json_success($response);
+
+        die();
+    }
+}

@@ -114,16 +114,19 @@
          * 
          */
         public function get_price(){
+			global $wpdb, $table_prefix;
+
             if($this->type == 'simple'):
-                $sql = "SELECT `old_price`, `price`, `suggested_price` FROM `{$this->table_prefix}{$this->table_name}` WHERE `post_id` = '{$this->id}' AND `ID` IN (SELECT MAX(ID) FROM `{$this->table_prefix}{$this->table_name}` WHERE `post_id` = '{$this->id}')";
-                // $sql = "SELECT `old_price`, `price`, `suggested_price` FROM `wp_woocommerce_product_archive` WHERE `post_id` = '{$this->id}' HAVING MAX(CAST(`created_date` AS SIGNED))";
+                $sql = "SELECT `old_price`, `price`, `suggested_price` FROM ".
+                "`{$table_prefix}{$this->table_name}` WHERE `post_id` = '{$this->id}'".
+                " AND `ID` IN (SELECT MAX(ID) FROM `{$table_prefix}{$this->table_name}` WHERE `post_id` = '{$this->id}')";
             elseif($this->type == 'variable'):
-                $sql = "SELECT `old_price`, `price`, `suggested_price` FROM `{$this->table_prefix}{$this->table_name}` WHERE `variation_id` = '{$this->id}' AND `ID` IN (SELECT MAX(ID) FROM `{$this->table_prefix}{$this->table_name}` WHERE `variation_id` = '{$this->id}')";
+                $sql = "SELECT `old_price`, `price`, `suggested_price` FROM `{$table_prefix}{$this->table_name}` WHERE `variation_id` = '{$this->id}' AND `ID` IN (SELECT MAX(ID) FROM `{$table_prefix}{$this->table_name}` WHERE `variation_id` = '{$this->id}')";
                 // $sql = "SELECT `old_price`, `price`, `suggested_price` FROM `wp_woocommerce_product_archive` WHERE `variation_id` = '{$this->id}' HAVING MAX(CAST(`created_date` AS SIGNED))";
             endif;
-            // return $sql;
-            $result = $this->wpdb->get_row($sql);
-            // return $sql;
+            
+            $result = $wpdb->get_row($sql);
+            
             return $result;
         }
         /**
@@ -132,12 +135,12 @@
          * 
          */ 
         public function create_table(){
-			
+			global $wpdb, $table_prefix;
             $result = true;
             
-            if( ! PD_Databse::is_table_exist( $this->table_prefix.$this->table_name ) ) {       
+            if( ! PDT_Databse::is_table_exist( $this->table_prefix.$this->table_name ) ) {       
                 
-    			$sql .= "CREATE TABLE ".$this->table_prefix.$this->table_name." (";
+    			$sql .= "CREATE TABLE ".$table_prefix.$this->table_name." (";
     			$sql .= 	"ID bigint(20) AUTO_INCREMENT NOT NULL,";
     			$sql .= 	"post_id bigint(20) NOT NULL,";
     			$sql .=     "variation_id bigint(20) NOT NULL,";
@@ -148,7 +151,7 @@
     			$sql .= 	"PRIMARY KEY(ID)";
     			$sql .= ");";
     			
-    		    $result = $this->wpdb->query( $this->wpdb->prepare( $sql ) );
+    		    $result = $wpdb->query( $wpdb->prepare( $sql ) );
 
             }
             
@@ -159,11 +162,11 @@
 		 * This function delete woocommerce_product_archive table
 		 */ 
 		public function delete_table(){
+			global $wpdb, $table_prefix;
 		    
-		    
-			$drop_sql  = "DROP TABLE IF EXISTS {$this->table_prefix}{$this->table_name};";
+			$drop_sql  = "DROP TABLE IF EXISTS {$table_prefix}{$this->table_name};";
 			
-			$result = $this->wpdb -> query($this->wpdb->prepare($drop_sql));
+			$result = $wpdb->query( $wpdb->prepare( $drop_sql ) );
             
 			return $result;
 		}

@@ -15,16 +15,7 @@
         public function __construct($data=[]){
             $this->name = isset($data['product_name'])?$data['product_name']:"";
             $this->price = isset($data['product_price'])?str_replace(",","",$data['product_price']):"";
-            require_once($_SERVER['DOCUMENT_ROOT'].'/wp-includes/wp-db.php');
-            require_once($_SERVER['DOCUMENT_ROOT'].'/wp-config.php');
-            global $table_prefix;
-        
-            $this->table_prefix = $table_prefix;
-            $this->wpdb = new wpdb(DB_USER,DB_PASSWORD,DB_NAME,DB_HOST);
-
-            // Load database class tools
-            require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/tools/class-pd-database.php';
-
+           
         }
         
         /**
@@ -95,8 +86,7 @@
         public function create_table(){
             global $wpdb, $table_prefix;
             // wp_die($this->table_name) ;
-            // wp_die( var_dump(PD_Databse::is_table_exist( $table_prefix.$this->table_name )) );
-            if( ! PD_Databse::is_table_exist( $table_prefix.$this->table_name ) ) {
+            if( ! PDT_Databse::is_table_exist( $table_prefix.$this->table_name ) ) {
                 $sql .= "CREATE TABLE " . $table_prefix . $this->table_name . "(";
                 $sql .=     "ID int(10) AUTO_INCREMENT NOT NULL,";
                 $sql .=     "NAME VARCHAR(255) COLLATE utf8mb4_unicode_520_ci NOT NULL,";
@@ -110,30 +100,7 @@
             return $result;
         }
         
-        /**
-         * This function create save information table
-         */ 
-        public  function create_save_information_table(){
-            global $wpdb, $table_prefix;
-            
-            
-            if( ! PD_Databse::is_table_exist( $table_prefix . $this->items_table_name ) ) {
-
-                $sql .= "CREATE TABLE " . $table_prefix . $this->items_table_name ." (";
-                $sql .=     "ID bigint(20) AUTO_INCREMENT NOT NULL,";
-                $sql .=     "post_id bigint(20) NOT NULL,";
-                $sql .=     "product_id bigint(20) NOT NULL,";
-                $sql .=     "variation_id bigint(20) NOT NULL,";
-                $sql .=     "product_number bigint(20) NOT NULL,";
-                $sql .=     "PRIMARY KEY(ID)";
-                $sql .= ");";
-                
-                $result = $wpdb -> query($wpdb->prepare($sql));
-
-            }
-            
-            return $result;
-        } 
+         
         /**
         *   This function created for Delete table
         */
@@ -146,17 +113,7 @@
             return $result;
         }
         
-        /**
-         * This function delete save information table
-         */ 
-        public  function delete_save_information_table(){
-            global $wpdb, $table_prefix ;
-                
-            $drop_sql  = "DROP TABLE IF EXISTS {$table_prefix}pd_product_items;";
-            
-            $result = $wpdb -> query($wpdb->prepare($drop_sql));
-            return $result;
-        }
+        
         /**
         *   This function save Product info to DataBase
         */
@@ -437,20 +394,21 @@
      * Get all of the woocommerce products that is called in the `CreatedProduct` Class and `RenderPage()` Function : JS function is get_woocommerce_products()
      * 
      */ 
-        public function get_woocommerce_products() {
-            // Security check
-            check_ajax_referer('referer_id', 'nonce');
-
-            $response = 'OK';
-            // Send response in JSON format
-            // wp_send_json( $response );
-            // wp_send_json_error();
-            wp_send_json_success($response);
-            $type        = $_POST['product_type'];
+    public function get_woocommerce_products() {
+        // Security check
+        check_ajax_referer('referer_id', 'nonce');
+        $type        = $_POST['product_type'];
         $status      = $_POST['product_status'];
         $limit       = $_POST['num_per_page'];
         $page        = $_POST['page_number'];
         
+            $response = 'OK';
+            // Send response in JSON format
+            // wp_send_json( $response );
+            // wp_send_json_error();
+        
+        wp_send_json_success($response);
+            
         
         /* Create instance primary substance from Product class*/
         $primary_substance = Product::GetInstance(); 
@@ -573,43 +531,46 @@
             'data'=>$result, 
             'num_of_pages'=>$products->max_num_pages
         ]));
-        }
-
-        public function clear_all_material_price() {
-            // Security check
-            check_ajax_referer('referer_id', 'nonce');
-
-            $response = 'OK';
-            // Send response in JSON format
-            // wp_send_json( $response );
-            // wp_send_json_error();
-            wp_send_json_success($response);
-            $result = Product::GetInstance()->clear_price();
-        die( json_encode( $result ) );
-        }
-
-        public function check_item_price() {
-            // Security check
-            check_ajax_referer('referer_id', 'nonce');
-
-            $response = 'OK';
-            // Send response in JSON format
-            // wp_send_json( $response );
-            // wp_send_json_error();
-            wp_send_json_success($response);
-            $product_id = $_POST[ 'product_id' ];
-
-        $result = Product::GetInstance()->get_blank_price_items( $product_id );
-// die(json_encode(['success'=>false, $result]));
-        if ( ! empty( $result ) ) {
-            // code...
-            $response[ 'success' ] = false;
-            $response[ 'data' ] = array_column( $result, 'NAME' );
-        } else {
-            $response[ 'success' ] = true;
-        }
-
-        die( json_encode( $response ) );
-        }
-
     }
+
+    public function clear_all_material_price() {
+        // Security check
+        check_ajax_referer('referer_id', 'nonce');
+        $result = $this->clear_price();
+
+        $response = 'OK';
+        // Send response in JSON format
+        // wp_send_json( $response );
+        // wp_send_json_error();
+        wp_send_json_success($response);
+        die();
+    }
+
+    public function check_item_price() {
+        // Security check
+        check_ajax_referer('referer_id', 'nonce');
+
+        $response = 'OK';
+        // Send response in JSON format
+        // wp_send_json( $response );
+        // wp_send_json_error();
+        
+        $product_id = $_POST[ 'product_id' ];
+
+        $result = $this->get_blank_price_items( $product_id );
+        if ( ! empty( $result ) ) {
+            wp_send_json_error( array_column( $result, 'NAME' ) );
+        } else {
+            wp_send_json_success( $response );
+        }
+
+        die();
+    }
+
+
+    public function load_dependencies() {
+        // Load database class tools
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/tools/class-pdt-database.php';
+    }
+
+}
