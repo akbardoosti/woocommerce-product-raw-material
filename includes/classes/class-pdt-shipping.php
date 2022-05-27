@@ -220,7 +220,7 @@ class PDT_Shipping {
     }
 
 
-    public function clear_all_wage_cost() {
+    public function clear_wage_cost() {
         global $wpdb, $table_prefix;
         
         $sql = "UPDATE ".
@@ -233,12 +233,26 @@ class PDT_Shipping {
         );
     }
 
+    public function clear_all_wage_cost() {
+        // Security check
+        check_ajax_referer('referer_id', 'nonce');
+
+        $response = 'OK';
+        $result = $this->clear_wage_cost();
+        // Send response in JSON format
+        // wp_send_json( $response );
+        // wp_send_json_error();
+        wp_send_json_success($response);
+
+        die();
+    }
+
     /**
      * Clear other_cost column in all of Shipping list in Database
      * @since 1.0.0
      * @return boolean The result of update
      */
-    public function clear_all_other_cost() {
+    public function clear_other_cost() {
         global $wpdb, $table_prefix;
         $sql = "UPDATE ".
         $table_prefix.
@@ -250,6 +264,21 @@ class PDT_Shipping {
         );
     }
 
+    public function clear_all_other_cost(){
+        // Security check
+        check_ajax_referer( 'clear_all_other_cost', 'nonce' );
+
+        $response = 'OK';
+        $result = $this->clear_other_cost();
+
+        // Send response in JSON format
+        // wp_send_json( $response );
+        // wp_send_json_error();
+        wp_send_json_success( $response );
+
+        die();
+    }
+
     /**
      * Get all of Shipping list
      * @since 1.0.0
@@ -257,7 +286,7 @@ class PDT_Shipping {
     */
     public function get_price_list() {
         // Security check
-        check_ajax_referer('referer_id', 'nonce');
+        check_ajax_referer('get_price_list', 'nonce');
 
         $response = 'OK';
         // Send response in JSON format
@@ -281,7 +310,7 @@ class PDT_Shipping {
     */
     public function save_shipping() {
         // Security check
-        check_ajax_referer('referer_id', 'nonce');
+        check_ajax_referer( 'save_shipping', 'nonce' );
         $shipping =  new PDT_Shipping( array(
             'shipping_cost' => $_POST['shipping_cost'], 
             'other_costs'   => $_POST['other_costs'], 
@@ -295,15 +324,13 @@ class PDT_Shipping {
         // wp_send_json( $response );
         // wp_send_json_error();
         wp_send_json_success($response);
-            
-        
-        
-        die(json_encode($result));
+                
+        die();
     }
 
     public function clear_all_shipping_cost() {
         // Security check
-        check_ajax_referer('referer_id', 'nonce');
+        check_ajax_referer('clear_all_shipping_cost', 'nonce');
 
         $response = 'OK';
         $result = $this->clear_shipping_cost();
@@ -316,32 +343,6 @@ class PDT_Shipping {
         die( json_encode( $result ) );
     }
 
-    public function clear_all_wage_cost() {
-        // Security check
-        check_ajax_referer('referer_id', 'nonce');
-
-        $response = 'OK';
-        $result = $this->clear_all_wage_cost();
-        // Send response in JSON format
-        // wp_send_json( $response );
-        // wp_send_json_error();
-        wp_send_json_success($response);
-
-        die();
-
-    }
-    public function clear_all_other_cost(){
-        // Security check
-        check_ajax_referer('referer_id', 'nonce');
-
-        $response = 'OK';
-        $result = $this->clear_all_other_cost();
-
-        // Send response in JSON format
-        // wp_send_json( $response );
-        // wp_send_json_error();
-        wp_send_json_success($response);
-
-        die();
-    }
+    
+    
 }
