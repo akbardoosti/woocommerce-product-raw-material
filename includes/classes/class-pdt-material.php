@@ -2,7 +2,7 @@
     require_once("class-category-profit.php");
     require_once("class-shipping.php");
     
-    class PDT_Product{
+    class PDT_Material{
         private $name;
         private $price;
         
@@ -353,6 +353,14 @@
             * 
             */
          public function save_product_info() {
+             // Security check
+            check_ajax_referer('referer_id', 'nonce');
+
+            $response = 'OK';
+            // Send response in JSON format
+            // wp_send_json( $response );
+            // wp_send_json_error();
+            wp_send_json_success($response);
             $formData = $_POST['formData'];
             foreach($formData as $row):
                 $product = new Product($row);
@@ -368,6 +376,14 @@
      * 
     */
         public function get_products() {
+            // Security check
+            check_ajax_referer('referer_id', 'nonce');
+
+            $response = 'OK';
+            // Send response in JSON format
+            // wp_send_json( $response );
+            // wp_send_json_error();
+            wp_send_json_success($response);
             $products = $this->get_all_products();
             die(json_encode($products));
         }
@@ -378,6 +394,14 @@
      * 
     */
         public function delete() {
+            // Security check
+            check_ajax_referer('referer_id', 'nonce');
+
+            $response = 'OK';
+            // Send response in JSON format
+            // wp_send_json( $response );
+            // wp_send_json_error();
+            wp_send_json_success($response);
             $product = new Product();
             $result = $product->delete_product($_POST['product_id']);
             die(json_encode($result));
@@ -389,6 +413,14 @@
      * 
     */
         public function update() {
+            // Security check
+            check_ajax_referer('referer_id', 'nonce');
+
+            $response = 'OK';
+            // Send response in JSON format
+            // wp_send_json( $response );
+            // wp_send_json_error();
+            wp_send_json_success($response);
             $product = new Product();
             $update_product = $_POST['product'];
             $product -> setName($update_product['NAME']);
@@ -406,6 +438,14 @@
      * 
      */ 
         public function get_woocommerce_products() {
+            // Security check
+            check_ajax_referer('referer_id', 'nonce');
+
+            $response = 'OK';
+            // Send response in JSON format
+            // wp_send_json( $response );
+            // wp_send_json_error();
+            wp_send_json_success($response);
             $type        = $_POST['product_type'];
         $status      = $_POST['product_status'];
         $limit       = $_POST['num_per_page'];
@@ -536,11 +576,27 @@
         }
 
         public function clear_all_material_price() {
+            // Security check
+            check_ajax_referer('referer_id', 'nonce');
+
+            $response = 'OK';
+            // Send response in JSON format
+            // wp_send_json( $response );
+            // wp_send_json_error();
+            wp_send_json_success($response);
             $result = Product::GetInstance()->clear_price();
         die( json_encode( $result ) );
         }
 
         public function check_item_price() {
+            // Security check
+            check_ajax_referer('referer_id', 'nonce');
+
+            $response = 'OK';
+            // Send response in JSON format
+            // wp_send_json( $response );
+            // wp_send_json_error();
+            wp_send_json_success($response);
             $product_id = $_POST[ 'product_id' ];
 
         $result = Product::GetInstance()->get_blank_price_items( $product_id );

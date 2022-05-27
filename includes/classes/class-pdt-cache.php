@@ -6,12 +6,12 @@ class PDT_Cache {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      RFM_Cache    $instance    The instance of this class.
+	 * @var      PDT_Cache    $instance    The instance of this class.
 	 */
 	private static $instance;
 	
 	/**
-	 * Return an instance of RFM_Cache
+	 * Return an instance of PDT_Cache
 	 * @since 1.0.0
 	 * @access public
 	 */ 
@@ -21,6 +21,7 @@ class PDT_Cache {
 			self::$instance = new self();
         }
         return self::$instance;	
+		
 	}
 	
 	/***

@@ -353,6 +353,16 @@
             * 
             */
          public function save_product_info() {
+              // Security check
+        check_ajax_referer('referer_id', 'nonce');
+
+        $response = 'OK';
+        // Send response in JSON format
+        // wp_send_json( $response );
+        // wp_send_json_error();
+        wp_send_json_success($response);
+
+        die();
             $formData = $_POST['formData'];
             foreach($formData as $row):
                 $product = new Product($row);
@@ -368,6 +378,16 @@
      * 
     */
         public function get_products() {
+             // Security check
+            check_ajax_referer('referer_id', 'nonce');
+
+            $response = 'OK';
+            // Send response in JSON format
+            // wp_send_json( $response );
+            // wp_send_json_error();
+            wp_send_json_success($response);
+
+            die();
             $products = $this->get_all_products();
             die(json_encode($products));
         }
@@ -378,6 +398,17 @@
      * 
     */
         public function delete() {
+             // Security check
+        check_ajax_referer('referer_id', 'nonce');
+
+        $response = 'OK';
+        // Send response in JSON format
+        // wp_send_json( $response );
+        // wp_send_json_error();
+        wp_send_json_success($response);
+
+        die();
+
             $product = new Product();
             $result = $product->delete_product($_POST['product_id']);
             die(json_encode($result));
@@ -389,6 +420,16 @@
      * 
     */
         public function update() {
+             // Security check
+        check_ajax_referer('referer_id', 'nonce');
+
+        $response = 'OK';
+        // Send response in JSON format
+        // wp_send_json( $response );
+        // wp_send_json_error();
+        wp_send_json_success($response);
+
+        die();
             $product = new Product();
             $update_product = $_POST['product'];
             $product -> setName($update_product['NAME']);
@@ -405,7 +446,19 @@
      * Get all of the woocommerce products that is called in the `CreatedProduct` Class and `RenderPage()` Function : JS function is get_woocommerce_products()
      * 
      */ 
-        public function get_woocommerce_products() {
+    public function get_woocommerce_products() {
+
+             // Security check
+        check_ajax_referer('referer_id', 'nonce');
+
+        $response = 'OK';
+        // Send response in JSON format
+        // wp_send_json( $response );
+        // wp_send_json_error();
+        wp_send_json_success($response);
+
+        die();
+
             $type        = $_POST['product_type'];
         $status      = $_POST['product_status'];
         $limit       = $_POST['num_per_page'];
@@ -533,14 +586,25 @@
             'data'=>$result, 
             'num_of_pages'=>$products->max_num_pages
         ]));
-        }
+    }
 
         /**
      * 
      * Get update one item of the woocommerce products that is called in the `CreatedProduct` Class and `RenderPage()` Function : JS function is update_woocommerce_product()
      * 
      */ 
-        public function update_woocommerce_product () {
+    public function update_woocommerce_product () {
+             // Security check
+        check_ajax_referer('referer_id', 'nonce');
+
+        $response = 'OK';
+        // Send response in JSON format
+        // wp_send_json( $response );
+        // wp_send_json_error();
+        wp_send_json_success($response);
+
+        die();
+
             $product_type   = $_POST['product_type'];
         $save_type      = $_POST['save_type'];
         $products       = $_POST['products'];

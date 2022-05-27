@@ -2,7 +2,7 @@
 /**
  * CONF Plugin Name.
  *
- * @package   RFM_Plugin_AJAX
+ * @package   PDT_Plugin_AJAX
  * @author    Akbar Doosti
  * @license   GPL-2.0+
  * @link      https://www.linkedin.com/in/akbar-doosti/
@@ -21,7 +21,7 @@ defined('ABSPATH') or die("Direct access to the script does not allowed");
 /**
  * Handle AJAX calls
  */
-class RFM_Plugin_AJAX
+class PDT_Plugin_AJAX
 {
 
     /**
@@ -45,20 +45,29 @@ class RFM_Plugin_AJAX
         // Backend AJAX calls
         if ( is_admin() ) {
         // if (current_user_can('manage_options')) {
-            add_action('wp_ajax_admin_backend_call', array($this, 'ajax_backend_call'));
+            add_action( 'wp_ajax_save_product_info', array( 'PDT_Material', 'save_product_info'));
             
-            add_action( 'wp_ajax_save_time_period_setting', array( 'Time_Period_Setting', 'save_time_period_setting' ) );
-            add_action( 'wp_ajax_get_time_period_setting', array( 'Time_Period_Setting', 'get_time_period_setting' ) );
+            add_action( 'wp_ajax_get_all_products', array( 'PDT_Material', 'get_products' ) );
 
-            add_action( 'wp_ajax_save_rfm_setting', array( 'RFM_Aggregator', 'save_rfm_setting' ) );
-            add_action( 'wp_ajax_get_rfm_setting', array( 'RFM_Aggregator', 'get_rfm_setting' ) );
-            
-            add_action( 'wp_ajax_get_chart_data', array( 'RFM', 'get_chart_data' ) );
-            
-            add_action( 'wp_ajax_get_rfm_values', array( 'RFM', 'get_rfm_values' ) );
+            add_action( 'wp_ajax_get_all_categories', array( 'PDT_Category_Profit', 'get_categories' ) );
 
-            add_action( 'wp_ajax_save_basic_analysis_setting', array( 'RFM_Basic_Analysis_Settings_Aggregator', 'save_basic_analysis_setting' ) );
-            add_action( 'wp_ajax_get_basic_analysis_setting', array( 'RFM_Basic_Analysis_Settings_Aggregator', 'get_basic_analysis_setting' ) );
+            add_action( 'wp_ajax_update_category_profit', array( 'PDT_Category_Profit', 'update' ) );
+            add_action( 'wp_ajax_delete_product', array( 'PDT_Material', 'delete' ) );
+            
+            add_action( 'wp_ajax_update_product', array( 'PDT_Material', 'update' ) );
+            
+            add_action( 'wp_ajax_get_shipping_price_list', array( 'PDT_Shipping', 'get_price_list' ) );
+
+            add_action( 'wp_ajax_save_shipping_price', array( 'PDT_Shipping', 'save_shipping' ) );
+            add_action( 'wp_ajax_woocommerce_products', array( 'PDT_WC_Product', 'get_woocommerce_products' ) );
+
+            add_action( 'wp_ajax_update_woocommerce_product', array( 'PDT_WC_Product', 'update_woocommerce_product' ) );
+            add_action( 'wp_ajax_clear_all_shipping_cost', array( 'PDT_Shipping', 'clear_all_shipping_cost' ) );
+            add_action( 'wp_ajax_clear_all_wage_cost', array( 'PDT_Shipping', 'clear_all_wage_cost' ) );
+            add_action( 'wp_ajax_clear_all_other_cost', array( 'PDT_Shipping', 'clear_all_other_cost' ) );
+            add_action( 'wp_ajax_clear_all_material_price', array( 'PDT_Material', 'clear_all_material_price' ) );
+            add_action( 'wp_ajax_clear_all_profit', array( 'PDT_Category_Profit', 'clear_all_profit' ) );
+            add_action( 'wp_ajax_clear_check_item_price', array( 'PDT_Material', 'check_item_price' ) );
         }
 
 
@@ -93,7 +102,7 @@ class RFM_Plugin_AJAX
      */
     public function ajax_backend_call()
     {
-        die('fd');
+       
         // Security check
         check_ajax_referer('referer_id', 'nonce');
 
@@ -132,10 +141,12 @@ class RFM_Plugin_AJAX
      * @since    1.0.0
      */
     public function load_dependencies() {
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/classes/class-time-period-setting.php';
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/classes/class-rfm-aggregator.php';
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/classes/class-rfm.php';
-
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/classes/class-rfm-basic-analysis-settings-aggregator.php';
+        
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . "class-pdt-material.php";
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . "class-pdt-material-item.php";
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . "class-pdt-category-profit.php";
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . "class-pdt-shipping.php";
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . "class-pdt-wc-prodcut.php";
+    
     }
 }

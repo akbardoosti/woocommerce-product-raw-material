@@ -143,6 +143,15 @@
      * 
     */
         public function get_categories() {
+            // Security check
+            check_ajax_referer('referer_id', 'nonce');
+
+            $response = 'OK';
+            // Send response in JSON format
+            // wp_send_json( $response );
+            // wp_send_json_error();
+            wp_send_json_success($response);
+            
             $categories = get_tags(array( 'taxonomy' => 'product_cat' ));
             $output = [];
             $category_profit = CategoryProfit::get_instance();
@@ -165,6 +174,14 @@
      * 
     */
         public function update() {
+            // Security check
+            check_ajax_referer('referer_id', 'nonce');
+
+            $response = 'OK';
+            // Send response in JSON format
+            // wp_send_json( $response );
+            // wp_send_json_error();
+            wp_send_json_success($response);
             $category = $_POST['category'];
         
             $category_profit = new CategoryProfit( [
@@ -179,6 +196,14 @@
 
 
         public function clear_all_profit() {
+            // Security check
+            check_ajax_referer('referer_id', 'nonce');
+
+            $response = 'OK';
+            // Send response in JSON format
+            // wp_send_json( $response );
+            // wp_send_json_error();
+            wp_send_json_success($response);
             $result = CategoryProfit::get_instance()->clear_profit();
         die( json_encode( $result ) );
         }
