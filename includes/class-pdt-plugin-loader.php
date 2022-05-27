@@ -6,8 +6,8 @@
  * @link       http://example.com
  * @since      1.0.1
  *
- * @package    rfm-plugin
- * @subpackage rfm-plugin/includes
+ * @package    pdt-plugin
+ * @subpackage pdt-plugin/includes
  */
 
 /**
@@ -18,11 +18,11 @@
  * run function to execute the list of actions and filters.
  *
  * @since      1.0.0
- * @package    rfm-plugin
- * @subpackage rfm-plugin/includes
+ * @package    pdt-plugin
+ * @subpackage pdt-plugin/includes
  * @author     Akbar Doosti <dousti1371@gmail.com>
  */
-class RFM_Plugin_Loader {
+class PDT_Plugin_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

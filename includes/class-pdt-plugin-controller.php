@@ -2,23 +2,23 @@
 
 
 /**
- * RFM_Plugin.
+ * PDT_Plugin.
  *
- * @package   RFM_Plugin_Controller
+ * @package   PDT_Plugin_Controller
  * @author    Akbar Doosti
  * @license   GPL-2.0+
  * @link      https://www.linkedin.com/in/akbar-doosti/
  * @copyright CONF_Plugin_Copyright
  */
 
-class RFM_Plugin_Controller {
+class PDT_Plugin_Controller {
 	
 	/**
 	 * The instance of this class
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      RFM_Plugin_Controller    $instance    The instance of this class.
+	 * @var      PDT_Plugin_Controller    $instance    The instance of this class.
 	 */
 	private static $instance;
 
@@ -35,7 +35,7 @@ class RFM_Plugin_Controller {
 	}
 
 	/**
-	 * Return an instance of RFM_Plugin_Controller
+	 * Return an instance of PDT_Plugin_Controller
 	 * @since 1.0.0
 	 * @access   public
 	 */ 
@@ -54,8 +54,8 @@ class RFM_Plugin_Controller {
 	 */ 
 	public function activate() {
 		Time_Period_Setting::get_instance()->activate();
-		RFM_Aggregator::get_instance()->activate();
-		RFM_Basic_Analysis_Settings_Aggregator::get_instance()->activate();
+		PDT_Aggregator::get_instance()->activate();
+		PDT_Basic_Analysis_Settings_Aggregator::get_instance()->activate();
 	}
 
 	/**
@@ -65,8 +65,8 @@ class RFM_Plugin_Controller {
 	 */
 	public function deactivate() {
 		Time_Period_Setting::get_instance()->deactivate();
-		RFM_Aggregator::get_instance()->deactivate();
-		RFM_Basic_Analysis_Settings_Aggregator::get_instance()->deactivate();
+		PDT_Aggregator::get_instance()->deactivate();
+		PDT_Basic_Analysis_Settings_Aggregator::get_instance()->deactivate();
 		
 	}
 
@@ -90,9 +90,9 @@ class RFM_Plugin_Controller {
 		
 		Time_Period_Setting::get_instance()->render_page();
 
-		RFM_Basic_Analysis_Settings_Aggregator::get_instance()->render_page();
+		PDT_Basic_Analysis_Settings_Aggregator::get_instance()->render_page();
 
-		RFM_Aggregator::get_instance()->render_page();
+		PDT_Aggregator::get_instance()->render_page();
 	
 	}
 

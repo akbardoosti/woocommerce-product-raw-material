@@ -9,8 +9,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    rfm-plugin
- * @subpackage rfm-plugin/includes
+ * @package    pdt-plugin
+ * @subpackage pdt-plugin/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    rfm-plugin
- * @subpackage rfm-plugin/includes
+ * @package    pdt-plugin
+ * @subpackage pdt-plugin/includes
  * @author     Akbar Doosti <dousti1371@gmail.com>
  */
-class RFM_Plugin_i18n {
+class PDT_Plugin_i18n {
 
 
 	/**
@@ -35,7 +35,7 @@ class RFM_Plugin_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'rfm',
+			'pdt-raw-material',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

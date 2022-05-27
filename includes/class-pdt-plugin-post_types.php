@@ -9,7 +9,7 @@
  * @package    Exopite_Portfolio
  * @subpackage Exopite_Portfolio/includes
  */
-class RFM_Plugin_Post_Types {
+class PDT_Plugin_Post_Types {
 
     /**
      * Register custom post type
@@ -27,23 +27,23 @@ class RFM_Plugin_Post_Types {
             'name'                  => $fields['plural'],
             'singular_name'         => $fields['singular'],
             'menu_name'             => $fields['menu_name'],
-            'new_item'              => sprintf( __( 'New %s', 'rfm' ), $fields['singular'] ),
-            'add_new_item'          => sprintf( __( 'Add new %s', 'rfm' ), $fields['singular'] ),
-            'edit_item'             => sprintf( __( 'Edit %s', 'rfm' ), $fields['singular'] ),
-            'view_item'             => sprintf( __( 'View %s', 'rfm' ), $fields['singular'] ),
-            'view_items'            => sprintf( __( 'View %s', 'rfm' ), $fields['plural'] ),
-            'search_items'          => sprintf( __( 'Search %s', 'rfm' ), $fields['plural'] ),
-            'not_found'             => sprintf( __( 'No %s found', 'rfm' ), strtolower( $fields['plural'] ) ),
-            'not_found_in_trash'    => sprintf( __( 'No %s found in trash', 'rfm' ), strtolower( $fields['plural'] ) ),
-            'all_items'             => sprintf( __( 'All %s', 'rfm' ), $fields['plural'] ),
-            'archives'              => sprintf( __( '%s Archives', 'rfm' ), $fields['singular'] ),
-            'attributes'            => sprintf( __( '%s Attributes', 'rfm' ), $fields['singular'] ),
-            'insert_into_item'      => sprintf( __( 'Insert into %s', 'rfm' ), strtolower( $fields['singular'] ) ),
-            'uploaded_to_this_item' => sprintf( __( 'Uploaded to this %s', 'rfm' ), strtolower( $fields['singular'] ) ),
+            'new_item'              => sprintf( __( 'New %s', 'pdt-raw-material' ), $fields['singular'] ),
+            'add_new_item'          => sprintf( __( 'Add new %s', 'pdt-raw-material' ), $fields['singular'] ),
+            'edit_item'             => sprintf( __( 'Edit %s', 'pdt-raw-material' ), $fields['singular'] ),
+            'view_item'             => sprintf( __( 'View %s', 'pdt-raw-material' ), $fields['singular'] ),
+            'view_items'            => sprintf( __( 'View %s', 'pdt-raw-material' ), $fields['plural'] ),
+            'search_items'          => sprintf( __( 'Search %s', 'pdt-raw-material' ), $fields['plural'] ),
+            'not_found'             => sprintf( __( 'No %s found', 'pdt-raw-material' ), strtolower( $fields['plural'] ) ),
+            'not_found_in_trash'    => sprintf( __( 'No %s found in trash', 'pdt-raw-material' ), strtolower( $fields['plural'] ) ),
+            'all_items'             => sprintf( __( 'All %s', 'pdt-raw-material' ), $fields['plural'] ),
+            'archives'              => sprintf( __( '%s Archives', 'pdt-raw-material' ), $fields['singular'] ),
+            'attributes'            => sprintf( __( '%s Attributes', 'pdt-raw-material' ), $fields['singular'] ),
+            'insert_into_item'      => sprintf( __( 'Insert into %s', 'pdt-raw-material' ), strtolower( $fields['singular'] ) ),
+            'uploaded_to_this_item' => sprintf( __( 'Uploaded to this %s', 'pdt-raw-material' ), strtolower( $fields['singular'] ) ),
 
             /* Labels for hierarchical post types only. */
-            'parent_item'           => sprintf( __( 'Parent %s', 'rfm' ), $fields['singular'] ),
-            'parent_item_colon'     => sprintf( __( 'Parent %s:', 'rfm' ), $fields['singular'] ),
+            'parent_item'           => sprintf( __( 'Parent %s', 'pdt-raw-material' ), $fields['singular'] ),
+            'parent_item_colon'     => sprintf( __( 'Parent %s:', 'pdt-raw-material' ), $fields['singular'] ),
 
             /* Custom archive label.  Must filter 'post_type_archive_title' to use. */
 			'archive_title'        => $fields['plural'],
@@ -165,20 +165,20 @@ class RFM_Plugin_Post_Types {
             'name'                       => $tax_fields['plural'],
             'singular_name'              => $tax_fields['single'],
             'menu_name'                  => $tax_fields['plural'],
-            'all_items'                  => sprintf( __( 'All %s' , 'rfm' ), $tax_fields['plural'] ),
-            'edit_item'                  => sprintf( __( 'Edit %s' , 'rfm' ), $tax_fields['single'] ),
-            'view_item'                  => sprintf( __( 'View %s' , 'rfm' ), $tax_fields['single'] ),
-            'update_item'                => sprintf( __( 'Update %s' , 'rfm' ), $tax_fields['single'] ),
-            'add_new_item'               => sprintf( __( 'Add New %s' , 'rfm' ), $tax_fields['single'] ),
-            'new_item_name'              => sprintf( __( 'New %s Name' , 'rfm' ), $tax_fields['single'] ),
-            'parent_item'                => sprintf( __( 'Parent %s' , 'rfm' ), $tax_fields['single'] ),
-            'parent_item_colon'          => sprintf( __( 'Parent %s:' , 'rfm' ), $tax_fields['single'] ),
-            'search_items'               => sprintf( __( 'Search %s' , 'rfm' ), $tax_fields['plural'] ),
-            'popular_items'              => sprintf( __( 'Popular %s' , 'rfm' ), $tax_fields['plural'] ),
-            'separate_items_with_commas' => sprintf( __( 'Separate %s with commas' , 'rfm' ), $tax_fields['plural'] ),
-            'add_or_remove_items'        => sprintf( __( 'Add or remove %s' , 'rfm' ), $tax_fields['plural'] ),
-            'choose_from_most_used'      => sprintf( __( 'Choose from the most used %s' , 'rfm' ), $tax_fields['plural'] ),
-            'not_found'                  => sprintf( __( 'No %s found' , 'rfm' ), $tax_fields['plural'] ),
+            'all_items'                  => sprintf( __( 'All %s' , 'pdt-raw-material' ), $tax_fields['plural'] ),
+            'edit_item'                  => sprintf( __( 'Edit %s' , 'pdt-raw-material' ), $tax_fields['single'] ),
+            'view_item'                  => sprintf( __( 'View %s' , 'pdt-raw-material' ), $tax_fields['single'] ),
+            'update_item'                => sprintf( __( 'Update %s' , 'pdt-raw-material' ), $tax_fields['single'] ),
+            'add_new_item'               => sprintf( __( 'Add New %s' , 'pdt-raw-material' ), $tax_fields['single'] ),
+            'new_item_name'              => sprintf( __( 'New %s Name' , 'pdt-raw-material' ), $tax_fields['single'] ),
+            'parent_item'                => sprintf( __( 'Parent %s' , 'pdt-raw-material' ), $tax_fields['single'] ),
+            'parent_item_colon'          => sprintf( __( 'Parent %s:' , 'pdt-raw-material' ), $tax_fields['single'] ),
+            'search_items'               => sprintf( __( 'Search %s' , 'pdt-raw-material' ), $tax_fields['plural'] ),
+            'popular_items'              => sprintf( __( 'Popular %s' , 'pdt-raw-material' ), $tax_fields['plural'] ),
+            'separate_items_with_commas' => sprintf( __( 'Separate %s with commas' , 'pdt-raw-material' ), $tax_fields['plural'] ),
+            'add_or_remove_items'        => sprintf( __( 'Add or remove %s' , 'pdt-raw-material' ), $tax_fields['plural'] ),
+            'choose_from_most_used'      => sprintf( __( 'Choose from the most used %s' , 'pdt-raw-material' ), $tax_fields['plural'] ),
+            'not_found'                  => sprintf( __( 'No %s found' , 'pdt-raw-material' ), $tax_fields['plural'] ),
         );
 
         $args = array(
