@@ -18,20 +18,6 @@ class PDT_Category_Profit
     private $table_name;
 
     /**
-     * Value of profit.
-     * @access private 
-     * @since 1.0.0
-     */
-    private $wpdb;
-
-    /**
-     * Value of profit.
-     * @access private 
-     * @since 1.0.0
-     */
-    private $table_prefix;
-
-    /**
      * Value of category id.
      * @access private 
      * @since 1.0.0
